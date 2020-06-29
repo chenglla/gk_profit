@@ -33,10 +33,12 @@
 
 <script>
     import bus from '../common/bus';
+    // import {findAgentInfo} from '@/api/index'
     export default {
         data() {
             return {
                 collapse: false,
+                // groupId: 0,
                 items: [
                     // {
                     //     icon: 'el-icon-lx-home',
@@ -60,14 +62,14 @@
                     // },
                     {
                         icon: 'el-icon-lx-cascades',
-                        index: 'table',
+                        index: 'tableTwo',
                         title: '收益查看'
                     },
-                    {
-                        icon: 'el-icon-picture-outline',
-                        index: 'promotion',
-                        title: '生成推广码'
-                    }
+                    // {
+                    //     icon: 'el-icon-picture-outline',
+                    //     index: 'promotion',
+                    //     title: '生成推广码'
+                    // }
                 ]
             }
         },
@@ -82,6 +84,20 @@
                 this.collapse = msg;
             })
         },
+        // mounted() {
+        //     this.getLevel()
+        // },
+        // methods: {
+        //     getLevel () {
+        //         findAgentInfo({
+        //             b: 0.6,
+        //             groupId: this.groupid,
+        //             page: 0
+        //         }).then(res => {
+        //             this.level = res.data.data.level
+        //         })
+        //     }
+        // }
     }
 </script>
 

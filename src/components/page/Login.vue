@@ -23,6 +23,7 @@
 </template>
 
 <script>
+    import {login} from '@/api/index'
     export default {
         data: function(){
             return {
@@ -44,9 +45,31 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     console.log('登录信息：', this.ruleForm, valid)
-                    if (valid && this.ruleForm.username === 'admin' && this.ruleForm.password === 'profit') {
-                        localStorage.setItem('ms_username',this.ruleForm.username);
-                        this.$router.push('/promotion');
+                    if (valid) {
+                        login({
+                            groupid: this.ruleForm.username,
+                            password: this.ruleForm.password
+                        }).then(res => {
+                            if (res.data.code === 0) {
+                                console.log(res.data)
+                                this.$store.commit('SET_LEVEL', res.data.data.level)
+                                this.$store.commit('SET_GROUPID', res.data.data.groupId)
+                                this.$message({
+                                    message: '恭喜你，登录成功',
+                                    type: 'success'
+                                });
+                                localStorage.setItem('ms_username',this.ruleForm.username);
+                                if (res.data.data.level === 1) {
+                                    this.$router.push('/table');
+                                } else {
+                                    this.$router.push('/tableTwo');
+                                }
+
+                            } else {
+                                this.$message.error('用户名或者密码错误');
+                            }
+                        })
+
                     } else {
                         console.log('error submit!!');
                         return false;

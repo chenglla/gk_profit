@@ -99,3 +99,17 @@ export function getAllAgent (req) { // 获取所有的代理
         params: req
     })
 }
+export function login (req) { // 用户登录
+    return request({
+        url: 'extends/login',
+        method: 'get',
+        params: req
+    })
+}
+export function updatePwd (req) { // 修改密码
+    return request({
+        url: 'extends/updatePwd',
+        method: 'get',
+        params: req
+    })
+}

@@ -49,13 +49,13 @@
                 <!--                    <el-date-picker type="date" placeholder="选择日期" v-model="form.date" value-format="yyyy-MM-dd" style="width: 100%;"></el-date-picker>-->
                 <!--                </el-form-item>-->
                 <el-form-item label="旧密码">
-                    <el-input v-model="form.oldPass" style="width: 100%;"></el-input>
+                    <el-input type="password" v-model="form.oldPass" style="width: 100%;"></el-input>
                 </el-form-item>
                 <el-form-item label="新密码">
-                    <el-input v-model="form.newPass"></el-input>
+                    <el-input type="password" v-model="form.newPass"></el-input>
                 </el-form-item>
                 <el-form-item label="确认密码">
-                    <el-input v-model="form.confirmPass"></el-input>
+                    <el-input type="password" v-model="form.confirmPass"></el-input>
                 </el-form-item>
 
             </el-form>
@@ -68,6 +68,7 @@
 </template>
 <script>
     import bus from '../common/bus';
+    import {updatePwd} from '@/api/index'
     import request from '../../../src/utils/request'
     export default {
         data() {
@@ -90,23 +91,42 @@
             username(){
                 let username = localStorage.getItem('ms_username');
                 return username ? username : this.name;
+            },
+            groupId () {
+                console.log('groupId:', this.$store.state.user.groupId)
+                return this.$store.state.user.groupId
             }
         },
         methods:{
             saveEdit() {
                 this.UpdateVisible = false;
-                request({
-                    url: '/api/updatePass/',
-                    method: 'GET',
-                    params: {
-                        oldPass: this.form.oldPass,
-                        newPass: this.form.newPass,
-                        id: this.form.id,
+                updatePwd({
+                    groupid: this.groupId,
+                    old_password: this.form.oldPass,
+                    new_password: this.form.newPass
+                }).then(res => {
+                    if (res.data.code === 0) {
+                        this.$message({
+                            message: '修改成功，请重新登录~',
+                            type: 'success'
+                        });
+                        this.$router.push('/login')
+                    } else {
+                        this.$message.error('修改失败~');
                     }
-                }).then(response => {
-                    this.message = response.data.message
-                    this.$message.success(this.message)
                 })
+                // request({
+                //     url: '/api/updatePass/',
+                //     method: 'GET',
+                //     params: {
+                //         oldPass: this.form.oldPass,
+                //         newPass: this.form.newPass,
+                //         id: this.form.id,
+                //     }
+                // }).then(response => {
+                //     this.message = response.data.message
+                //     this.$message.success(this.message)
+                // })
                 // this.$message.success(this.message);
             },
             updatepwd() {
@@ -115,7 +135,7 @@
             },
             // 用户名下拉菜单选择事件
             handleCommand(command) {
-                if(command == 'loginout'){
+                if(command === 'loginout'){
                     localStorage.removeItem('ms_username')
                     this.$router.push('/login');
                 }

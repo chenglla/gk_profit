@@ -36,6 +36,11 @@ export default new Router({
                     meta: { title: '收益查看' }
                 },
                 {
+                    path: '/tableTwo',
+                    component: resolve => require(['../components/page/BaseTableTwo.vue'], resolve),
+                    meta: { title: '收益查看' }
+                },
+                {
                     path: '/promotion',
                     component: resolve => require(['../components/page/promotionCode.vue'], resolve),
                     meta: { title: '生成推广码' }
