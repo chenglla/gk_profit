@@ -1,22 +1,30 @@
 <template>
     <div>
         <el-row :gutter="15">
-            <el-col :span="12">
+            <el-col :span="8">
+                <el-card shadow="hover" class="mgb20 one_agent_info" style="height: 200px">
+                    <h3>所有代理信息</h3>
+                    <div>
+                        <p>引入用户付费总额：{{allMoney}} 元 （一级+二级）</p>
+                    </div>
+                </el-card>
+            </el-col>
+            <el-col :span="8">
                 <el-card shadow="hover" class="mgb20 one_agent_info" style="height: 200px">
                     <h3>一级代理信息</h3>
                     <div>
                         <p>当前代理号：{{groupId}}</p>
                         <p>引入用户总数：{{userCounts}}</p>
                         <p>引入用户付费总数：{{payCount}} <span v-if="payCount > 0" @click="getPayList" class="get_pay_list">查看详情</span></p>
-                        <p>引入用户付费总额：{{sumMoney}} 元</p>
+                        <p>引入用户付费总额：{{sumMoney}} 元 （一级）</p>
                     </div>
                 </el-card>
             </el-col>
-            <el-col :span="12">
+            <el-col :span="8">
                 <el-card shadow="hover" class="mgb20 one_agent_info" style="height: 200px">
                     <h3>二级代理信息</h3>
                     <div>
-                        <p>代理所引入的总收益：{{agentMoney}} 元</p>
+                        <p>代理所引入的总收益：{{agentMoney}} 元 （二级）</p>
                     </div>
                 </el-card>
             </el-col>
@@ -148,6 +156,7 @@
                 vipmap: [],
                 yucemap: [],
                 sumMoney: '',
+                allMoney: '',
                 agentMoney: '',
                 profit: '',
                 nowTime: '',
@@ -247,6 +256,7 @@
                     this.userCounts = res.data.data.usercounts
                     this.payCount = res.data.data.paycount
                     this.sumMoney = res.data.data.summoney
+                    this.allMoney = res.data.data.allMoney
                     this.agentMoney = res.data.data.agentMoney
                     this.profit = res.data.data.profit
                     this.preWeekSummoney = res.data.data.preWeekSummoney
