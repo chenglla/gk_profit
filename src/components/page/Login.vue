@@ -60,9 +60,20 @@
                                 });
                                 localStorage.setItem('ms_username',this.ruleForm.username);
                                 if (res.data.data.level === 1) {
-                                    this.$router.push('/table');
+                                    this.$router.push({
+                                        name: 'table',
+                                        query: {
+                                            groupId: res.data.data.groupId
+                                        }
+                                    });
                                 } else {
-                                    this.$router.push('/tableTwo');
+                                    this.$router.push({
+                                        name: 'tableTwo',
+                                        query: {
+                                            groupId: res.data.data.groupId
+                                        }
+                                    });
+                                    // this.$router.push('/tableTwo');
                                 }
 
                             } else {

@@ -119,7 +119,8 @@
         computed: {
             groupId () {
                 console.log('groupId:', this.$store.state.user.groupId)
-                return this.$store.state.user.groupId
+                // return this.$store.state.user.groupId
+                return this.$route.query.groupId
             },
         },
         mounted () {

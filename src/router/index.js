@@ -32,11 +32,13 @@ export default new Router({
                 },
                 {
                     path: '/table',
+                    name: 'table',
                     component: resolve => require(['../components/page/BaseTable.vue'], resolve),
                     meta: { title: '收益查看' }
                 },
                 {
                     path: '/tableTwo',
+                    name: 'tableTwo',
                     component: resolve => require(['../components/page/BaseTableTwo.vue'], resolve),
                     meta: { title: '收益查看' }
                 },

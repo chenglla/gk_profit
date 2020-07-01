@@ -13,6 +13,7 @@
                             class="handle-input"
                             placeholder="请输入代理号"
                             v-model="groupId"
+                            :disabled="true"
                             clearable>
                     </el-input>
                 </div>
@@ -38,13 +39,17 @@
         name: 'basetable',
         data() {
             return {
-                groupId: '',
+                // groupId: '',
                 num: 0
             }
         },
-        mounted() {
+        computed: {
+            groupId () {
+                console.log('groupId:', this.$store.state.user.groupId)
+                // return this.$route.query.groupId
+                return this.$store.state.user.groupId
+            },
         },
-        computed: {},
         methods: {
             downLoadCode () {
                 getGenerateCode({
