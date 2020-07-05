@@ -47,7 +47,8 @@
             groupId () {
                 console.log('groupId:', this.$store.state.user.groupId)
                 // return this.$route.query.groupId
-                return this.$store.state.user.groupId
+                return localStorage.groupId
+                // return this.$store.state.user.groupId
             },
         },
         methods: {

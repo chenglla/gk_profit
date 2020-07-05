@@ -174,8 +174,13 @@
         },
         computed: {
             groupId () {
-                console.log('groupId:', this.$store.state.user.groupId)
-                return this.$route.query.groupId
+                // console.log('groupId1:', this.$store.state.user.groupId, 'hahah')
+                // console.log('groupId2:', this.$store.state.user.groupId === '')
+                // console.log('groupId3:', this.$store.state.user.groupId === undefined)
+                return localStorage.groupId
+                    // return this.$route.query.groupId
+                // }
+                 // this.$store.state.user.groupId
                 // return this.$store.state.user.groupId
             },
         },
