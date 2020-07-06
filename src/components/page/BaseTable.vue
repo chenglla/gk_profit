@@ -185,7 +185,11 @@
             },
         },
         mounted () {
-            if (this.groupid === '') {
+            if (this.groupId === undefined) {
+                location.href = 'http://www.kgai.tech/cee_pc/#/login'
+                return
+            }
+            if (this.groupId === '') {
                 this.getOneScoreProvince()
                 this.getAllAgent()
             } else {

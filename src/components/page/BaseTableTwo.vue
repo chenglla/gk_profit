@@ -120,10 +120,15 @@
             groupId () {
                 console.log('groupId:', this.$store.state.user.groupId)
                 // return this.$store.state.user.groupId
-                return this.$route.query.groupId
+                // return this.$route.query.groupId
+                return localStorage.groupId
             },
         },
         mounted () {
+            if (this.groupId === undefined) {
+                location.href = 'http://www.kgai.tech/cee_pc/#/login'
+                return
+            }
             // if (this.groupId === '') {
             //     this.getOneScoreProvince()
             //     this.getAllAgent()
